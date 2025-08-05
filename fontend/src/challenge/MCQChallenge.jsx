@@ -2,15 +2,17 @@ import'react'
 import {useState} from 'react'
 
 
-export function MCQChallenge(challenge, showExplanation = false) {
+export function MCQChallenge({ challenge, showExplanation = false }) {
     const [selectedOption, setSelectedOption] = useState(null)
-    const [shouldshowExplanation, setShouldShowExplanation] = useState(shouldshowExplanation)
-    
-    const option = typeof challenge.options === 'string' 
-    ? JSON.parse(challenge.options) : challenge.options
+    const [shouldShowExplanation, setShouldShowExplanation] = useState(showExplanation)
 
+    const options = typeof challenge.options === 'string' 
+    ? JSON.parse(challenge.options) : challenge.options
+    if (!challenge || !challenge.difficulty || !challenge.title || !Array.isArray(options)) {
+        return <div>Lỗi: Dữ liệu câu hỏi không hợp lệ: {challenge.difficulty},{challenge.title},{challenge.options}</div>;
+    }
     const handleOptionChange = (index) => {
-        if (selectedOption !=nulls) return;
+        if (selectedOption !=null) return;
         setSelectedOption(index)
         setShouldShowExplanation(true)
     }
@@ -30,17 +32,17 @@ export function MCQChallenge(challenge, showExplanation = false) {
         <p><strong>Difficulty</strong>:{challenge.difficulty}</p>
         <p className='challenge-title'>{challenge.title}</p>
         <div className='options'>
-            {option.map((option, index) => (
+            {options.map((option, index) => (
                 <div
-                    key={index}
                     className={getOptionClass(index)}
+                    key={index}
                     onClick={() => handleOptionChange(index)}
                 >
                     {option}
                 </div>
             ))} 
         </div>
-        {shouldshowExplanation &&  selectedOption!==null &&(
+        {shouldShowExplanation && selectedOption !== null &&(
             <div className='explanation'>
                 <h4>Explanation</h4>
                 <p>{challenge.explanation}</p>

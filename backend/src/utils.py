@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from clerlk_backend_api import Clerk, AuthenticateRequestOptions
+from clerk_backend_api import Clerk, AuthenticateRequestOptions
 import os 
 from dotenv import load_dotenv
 
@@ -7,15 +7,15 @@ load_dotenv()
 
 clerk_sdk = Clerk( bearer_auth=os.getenv("CLERK_API_KEY") )
 
-def authenticate_and_get_user(request):
+def authenticate_and_get_user_details(request):
     """
     Authenticate the user using Clerk and return the user object.
     """
     try:
-        reques_state = clerk_sdk.authenticate_request(
+        request_state = clerk_sdk.authenticate_request(
             request,
             AuthenticateRequestOptions(
-                authorized_parties=["http://localhost:5173","localhost:5173"],
+                authorized_parties=["http://localhost:5173","http://localhost:5174"],
                   jwt_key=os.getenv("JWT_KEY")  # Adjust this to your authorized parties
                 )
             )

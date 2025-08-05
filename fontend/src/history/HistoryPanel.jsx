@@ -1,18 +1,29 @@
 import 'react'
 import {useState, useEffect} from 'react'
 import {MCQChallenge} from '../challenge/MCQChallenge.jsx'
-
+import {useApi} from '../utils/api.js'
 
 export function HistoryPanel() {
     const [history, setHistory] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
+    const {makeRequest}=useApi()
+    const [difficulty, setDifficulty]= useState("esay")
     useEffect(() => {
         fetchHistory()
+        console.log(history)
     }, [])
 
     const fetchHistory = async () => {
         setIsLoading(false)
+        setError(null)
+        try{ 
+            const data = await makeRequest("my-history")
+            setHistory(data)
+            console.log(data)
+        }catch (err){
+            console.log(err)
+        }
         
     }
 
@@ -29,13 +40,25 @@ export function HistoryPanel() {
 
     return <div className='history-panel'>
         <h2>History</h2>
+         <div className="difficulty-selector">
+            <label htmlFor="difficulty">Search Challenges History By Difficulty</label>
+            <select 
+                id="difficulty" 
+                value={difficulty} 
+                onChange={(e) => setDifficulty(e.target.value)}
+            >
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
         {history.length === 0 ? <p>No challenges history</p> : 
         <div>
             {history.map((challenge) => {
                 return <MCQChallenge 
                 challenge={challenge} 
                 key={challenge.id} 
-                showExplanation
+                showExplanation="true"
             />
             })}
         </div>

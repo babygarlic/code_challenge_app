@@ -21,11 +21,13 @@ def generate_challenge_ai(difficulty: str) -> Dict[str, Any]:
     
     Return the challenge in the following JSON structure:
     {
-        "title":"The question title",
+        "title":"The question",
         "options":["option 1","option 2","option 3","option 4"],
         "correct_answer_id":0, // Index of the correct answer (0-3)
         "explanation":"Detailed explanation of why the correct answer is right"
     }
+    Caution:
+    Return tre format.
     Make sure the options are plausible but with only one clearly correct answer.
 """
     try:

@@ -80,7 +80,7 @@ async def get_quota(request:Request, db: Session = Depends(get_db)):
     
     quota = get_challenge_quota(db, user_id)
     if not quota:
-        return "Khoong lay duoc du lieu",{
+        return{
             "user_id": user_id,
             "quota_remaining": 0,
             "last_reset_date": datetime.now()

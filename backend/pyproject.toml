@@ -10,6 +10,7 @@ dependencies = [
     "openai>=1.98.0",
     "python-dotenv>=1.1.1",
     "sqlalchemy>=2.0.42",
+    "svix>=1.70.0",
     "together>=1.5.21",
     "uvicorn>=0.35.0",
 ]

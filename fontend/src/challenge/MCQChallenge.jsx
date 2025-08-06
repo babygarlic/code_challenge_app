@@ -2,7 +2,7 @@ import'react'
 import {useState} from 'react'
 
 
-export function MCQChallenge({ challenge, showExplanation = false }) {
+export function MCQChallenge({ challenge, showExplanation = false}) {
     const [selectedOption, setSelectedOption] = useState(null)
     const [shouldShowExplanation, setShouldShowExplanation] = useState(showExplanation)
 
@@ -18,11 +18,10 @@ export function MCQChallenge({ challenge, showExplanation = false }) {
     }
     const getOptionClass = (index) => {
         if (selectedOption === null) return "option"
-
-        if (index === challenge.correct_answer_id) {
-            return "option correct"
+        if (index == challenge.correct_answer_id) {
+            return "option correct" 
         }
-        if (selectedOption === index && index !== challenge.correct_answer_id) {
+        if (selectedOption == index && index != challenge.correct_answer_id) {
             return "option incorrect"
         }
         return "option"

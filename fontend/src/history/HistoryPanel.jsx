@@ -8,10 +8,9 @@ export function HistoryPanel() {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const {makeRequest}=useApi()
-    const [difficulty, setDifficulty]= useState("esay")
+    const [classify, setClassify]= useState("all")
     useEffect(() => {
         fetchHistory()
-        console.log(history)
     }, [])
 
     const fetchHistory = async () => {
@@ -20,7 +19,6 @@ export function HistoryPanel() {
         try{ 
             const data = await makeRequest("my-history")
             setHistory(data)
-            console.log(data)
         }catch (err){
             console.log(err)
         }
@@ -43,10 +41,11 @@ export function HistoryPanel() {
          <div className="difficulty-selector">
             <label htmlFor="difficulty">Search Challenges History By Difficulty</label>
             <select 
-                id="difficulty" 
-                value={difficulty} 
+                id="classify_difficulty" 
+                value={classify} 
                 onChange={(e) => setDifficulty(e.target.value)}
             >
+                <option value="all">All</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>

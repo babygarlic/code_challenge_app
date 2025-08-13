@@ -65,8 +65,6 @@ uvicorn = ">=0.35.0"
 ### Frontend
 - **Framework**: React
 - **UI Components**: Multiple-choice interface
-- **State Management**: React hooks
-- **Styling**: CSS/Tailwind CSS
 
 ### Infrastructure
 - **API Architecture**: RESTful API
